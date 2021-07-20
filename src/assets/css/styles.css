@@ -1,0 +1,10 @@
+*{  margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1{
+    background: blue;
+    /* background-image: url("./../images/fabrica-de-coets.jpg");
+    background-repeat: no-repeat; */
+}
