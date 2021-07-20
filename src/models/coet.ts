@@ -29,11 +29,15 @@ export class Coet{
     }
 
     addPropulsor(value: number){
-        this._propulsors.push(new Propulsor(this._propulsors.length, value))
+        this._propulsors.push(new Propulsor(this._propulsors.length + 1, value))
     }
 
     getImage(rocket:string) :string{
         return require('../assets/images/' + rocket + '.png')
+    }
+
+    getImageCursa(rocket:string) :string{
+        return require('@/assets/images/' + rocket + '.png')
     }
 
     getMaxPower() :number{
@@ -41,7 +45,6 @@ export class Coet{
         for (let i = 0; i < this._propulsors.length; i++) {
             power = power + this._propulsors[i]._maxpower;
         }
-        console.log(this._propulsors[1]._maxpower);
         return power;
     }
 

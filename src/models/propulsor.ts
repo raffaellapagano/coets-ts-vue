@@ -10,4 +10,8 @@ export class Propulsor{
     public get maxpower(): number{
         return this._maxpower;
     }
+
+    setPropulsorPower(value: number){
+        this._maxpower = value;
+    }
 }

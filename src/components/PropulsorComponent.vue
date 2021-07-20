@@ -6,7 +6,7 @@
                     class="form-control"
                     id="powerProp"
                     v-model.number="powerProp"
-                    @blur="addPropulsor(propulsor._idPropulsor)"
+                    @blur="changePropulsor(propulsor._idPropulsor)"
                     /> </p> 
     </div>
 </template>
@@ -24,19 +24,9 @@ export default class PropulsorComponent extends Vue {
 
   @Prop() public propulsor!: number;
 
-  addPropulsor(id: number){
-      let verify = false;
-      for (let i = 0; i < this.$store.state.coet._propulsors.length; i++) {
-          if(this.$store.state.coet._propulsors[i]._idPropulsor === id){
-              this.$store.dispatch("changePropMax", this.powerProp);
-          verify = true;
-          }
-      }
-
-      if(!verify){
-      this.$store.dispatch("addProp", new Propulsor(id, this.powerProp));
-      console.log(this.$store.state.coet);
-      }
+  changePropulsor(id: number){
+      let newId = id-1;
+      this.$store.state.coet._propulsors[newId].setPropulsorPower(this.powerProp);
   }
 
 //   @Emit()

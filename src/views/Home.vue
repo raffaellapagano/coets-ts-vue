@@ -17,7 +17,7 @@
     </div>
     <div class="d-flex justify-content-end">
       <img src="./../assets/images/astronauta.png" alt="" class="mr-2 animate__animated animate__bounceInLeft ">
-      <button class="btn btn-primary mr-3">Carrera</button>
+      <button class="btn btn-primary mr-3" @click="carregarCursa">Cursa</button>
     </div>
 
     <!-- ***************************************Modal********************************* -->
@@ -69,7 +69,7 @@
                     <option style="background-color: red">6</option>
                 </select>
               </div>
-              <div id="errorColor" class="invalid-feedback text-danger">Compo obligatori</div>
+              <div id="errorColor" class="invalid-feedback text-danger">Campo obligatori</div>
               <div class="form-group">
                 <label for="propulCoet">Núm. propulsors del coet</label>
                 <input
@@ -77,6 +77,7 @@
                   class="form-control"
                   id="numProp"
                   v-model.number="numPropulsors"
+                  @blur="creatBasic()"
                 />
               </div>
               <div id="errorProp" class="invalid-feedback text-danger">Compo obligatori</div>
@@ -167,11 +168,17 @@ export default class Home extends Vue {
   //   // }
   // }
 
+  creatBasic() :void{
+      
+      for (let i = 1; i < this.numPropulsors+1; i++) {
+        this.coet.addPropulsor(10)        
+      }
+
+  }
+
   creatCoet() :void{
-    // this.$store.dispatch("addCoet", this.$store.state.coet);
-    // this.cleanCoet();
     let color = parseInt(this.selected);
-    let coetNew= new Coet (this.coet._codi, [this.coet._propulsors[0]._maxpower], color);
+    let propulsorStar: Array<number> = [];
 
     // S'elimina els errors d'una validació prèvia
     let codiCoet: HTMLElement | null = document.getElementById("codiCoet");
@@ -193,6 +200,10 @@ export default class Home extends Vue {
         errorForm++;
     }
 
+    if(this.selected === ""){
+      errorForm++
+    }
+
     if (this.numPropulsors === 0) {
         numProp.classList.add("is-invalid");
         errorProp.classList.remove("invalid-feedback");
@@ -200,19 +211,24 @@ export default class Home extends Vue {
     }
 
     if (errorForm === 0) {
-      for (let i = 1; i < this.coet._propulsors.length; i++) {
+      let coetNew= new Coet (this.coet._codi, this.coet._propulsors[0], color);
+      for (let i = 0; i < this.coet._propulsors.length; i++) {
       coetNew.addPropulsor(this.coet._propulsors[i]._maxpower);
+      }
+      this.coetsHome.push(coetNew);
+      console.log(coetNew)
+      console.log(this.coetsHome)
+      alert("S'ha creado " + coetNew._codi);
+      this.cleanCoet();
+      numProp.classList.remove("is-invalid");
+      codiCoet.classList.remove("is-invalid");
+      errorCodi.classList.add("invalid-feedback");
+      errorProp.classList.add("invalid-feedback");
+      }else{
+        alert("Datos incompleto")
+      }
+      
     }
-    this.coetsHome.push(coetNew);
-    alert("S'ha creado " + coetNew._codi);
-    this.cleanCoet();
-    numProp.classList.remove("is-invalid");
-    codiCoet.classList.remove("is-invalid");
-    errorCodi.classList.add("invalid-feedback");
-    errorProp.classList.add("invalid-feedback");
-    }
-    
-  }
 
   cleanCoet() :void{
     this.codi = "";
@@ -240,6 +256,13 @@ export default class Home extends Vue {
     if(!verify){
       this.$store.state.coet._propulsors.push(prop);
     }
+  }
+
+  carregarCursa(): void {
+       // Obrir ruta de la cursa
+    // sessionStorage.setItem("voltes_cursa", numvoltes.toString());
+    this.$store.state.coets = this.coetsHome.slice();
+    this.$router.push("/cursa"); 
   }
 
   // click (coet: Coet) {
