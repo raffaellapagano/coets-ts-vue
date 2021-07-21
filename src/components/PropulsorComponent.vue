@@ -28,29 +28,4 @@ export default class PropulsorComponent extends Vue {
       let newId = id-1;
       this.$store.state.coet._propulsors[newId].setPropulsorPower(this.powerProp);
   }
-
-//   @Emit()
-//   addPropulsor(): void {
-//     this.$emit("addPower", this.powerProp);
-//   }
-  
-}
-
-
-// import { Component, Vue } from "vue-property-decorator";
-// import Vuex from 'vuex'
-// import { Propulsor } from "../models/propulsor"
-
-// Vue.use(Vuex)
-
-// export default Vue.extend({
-//     props: {
-//         propulsor: Propulsor
-//     },
-//     data(){
-//         return{
-//             powerProp: 10,
-//         }
-//     }
-// })
 </script>

@@ -9,24 +9,19 @@
           <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
         </div>        
         <div v-else-if="coet._curpower < 19" class="carrera">
-          <p class="card text-dark ">{{ coet._codi }}</p>
-          <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
+          <RocketCursa :coet="coet" :imgArray="imgArray" />
         </div>
         <div v-else-if="coet._curpower < 29" class="carrera20">
-          <p class="card text-dark">{{ coet._codi }}</p>
-          <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
+           <RocketCursa :coet="coet" :imgArray="imgArray" />
         </div>
         <div v-else-if="coet._curpower < 39" class="carrera10">
-          <p class="card text-dark">{{ coet._codi }}</p>
-          <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
+           <RocketCursa :coet="coet" :imgArray="imgArray" />
         </div>
         <div v-else-if="coet._curpower <49" class="animate__animated animate__bounceInRight">
-          <p class="card text-dark">{{ coet._codi }}</p>
-          <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
+           <RocketCursa :coet="coet" :imgArray="imgArray" />
         </div>
         <div v-else-if="coet._curpower >48" class="animate__animated animate__zoomInRight">
-          <p class="card text-dark">{{ coet._codi }}</p>
-          <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
+           <RocketCursa :coet="coet" :imgArray="imgArray" />
         </div>
       </div>
     </div>
@@ -71,8 +66,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import Vuex from 'vuex';
 import Rocket from './../components/Rocket.vue';
 import PropulsorComponent from '../components/PropulsorComponent.vue';
+import RocketCursa from './../components/cusaRocket.vue'
 import { Coet } from './../models/coet';
-import { Propulsor } from './../models/propulsor';
 
 Vue.use(Vuex)
 
@@ -80,20 +75,17 @@ Vue.use(Vuex)
   components: {
     Rocket,
     PropulsorComponent,
-  },
+    RocketCursa,
+  }
 })
 export default class Home extends Vue {
-  coet1 = new Coet("12345678", [20, 30], 2);
-  coet2 = new Coet("qwertyui", [20, 30], 2);
+  
   coets = new Array<Coet>();
-  // coets = new Array<Coet>();
   imgArray= ["rocket01", "rocket02", "rocket03", "rocket04", "rocket05", "rocket06"];
   show = false
 
   mounted(): void {
-      // this.coets = this.$store.getters.getCoets;
-      this.coets.push(this.coet1);
-      this.coets.push(this.coet2);
+      this.coets = this.$store.getters.getCoets;
   }
 
   get getCoets(): Coet[] {
@@ -192,8 +184,4 @@ export default class Home extends Vue {
         transform: translateX(calc(100vw - 10vmin));
     }
 }
-
-/* carrera-enter-active {
-  animation: translateY .5s;
-} */
 </style>

@@ -84,17 +84,11 @@
               <div v-if="numPropulsors > 0">
                 <div v-for="propulsor in numPropulsors" :key="propulsor.id">
                   <propulsor-component :propulsor="setProp(propulsor)" @addPower="insertProp(powerProp, propulsor)" />
-                  <!-- <p>Propulsor núm.{{ propulsor }} amb potencia máxim de 
-                    <input
-                    type="number"
-                    class="form-control"
-                    id="powerProp"
-                    v-model.number="powerProp"
-                    /> </p>  -->
                 </div>
               </div>
 
               <button type="button" class="btn btn-primary animate__animated animate__pulse" @click="creatCoet()">Submit</button>
+              <button v-if="coetsHome.length != 0" type="button" class="btn btn-success m-2" data-dismiss="modal"> Ver coets fabricats</button>
             </form>
           </div>
         </div>
@@ -180,19 +174,12 @@ export default class Home extends Vue {
     let color = parseInt(this.selected);
     let propulsorStar: Array<number> = [];
 
-    // S'elimina els errors d'una validació prèvia
+    // Resetear
     let codiCoet: HTMLElement | null = document.getElementById("codiCoet");
     let numProp:  HTMLElement | null = document.getElementById("numProp");
     let errorCodi: HTMLElement | null= document.getElementById("errorCodi");
     let errorProp: HTMLElement | null= document.getElementById("errorProp");
     let errorForm = 0;
-
-    // errcodi.innerHTML = "";
-
-    // codi.classList.remove("is-invalid");
-    // voltes.classList.remove("is-invalid");
-    // errcodi.innerHTML = "";
-    // errvoltes.innerHTML = "";
 
     if (this.codi.length != 8) {
         codiCoet.classList.add("is-invalid");
@@ -259,38 +246,11 @@ export default class Home extends Vue {
   }
 
   carregarCursa(): void {
-       // Obrir ruta de la cursa
-    // sessionStorage.setItem("voltes_cursa", numvoltes.toString());
     this.$store.state.coets = this.coetsHome.slice();
     this.$router.push("/cursa"); 
   }
 
-  // click (coet: Coet) {
-  //   this.infoCoet = false;
-  //   this.coet = coet;
-  //   this.$store.dispatch("addCoet", this.coet);
-  //   this.coets.push(this.coet)
-  //   console.log(this.coets);
-  //   this.infoCoet = true;
-  // }
-
-  //  // Assigna tot l'array de cohets al store
-  // putCoets(coets: Map<string, Coet>): void {
-  //   this.$store.dispatch("addCoet", coets);
-  // }
-
-  // veureInfoCoet(coet: Coet) {
-  //   let text = coet.veure();
-  //   alert(text);
-  // }
-
-  // veureTotsCoets() {
-  //   let text = "";
-  //   for (let i = 0; i < this.coets.length; i++) {
-  //     text = text + this.coets[i].veure(); 
-  //   }
-  //   alert(text)
-  // }
+ 
 }
 </script>
 
@@ -300,4 +260,5 @@ export default class Home extends Vue {
   background-image: url("./../assets/images/fabrica-de-coets.jpg");
   background-position: center;
 }
+
 </style>

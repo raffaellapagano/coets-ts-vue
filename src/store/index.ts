@@ -2,8 +2,6 @@ import { Propulsor } from '@/models/propulsor'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { Coet } from './../models/coet'
-// import { RootState } from './../store/types'
-// import { Propulsor } from './../models/propulsor'
 
 Vue.use(Vuex)
 
@@ -14,7 +12,6 @@ export default new Vuex.Store({
     prueba: 0,
     coet: new Coet("", [10], 1),
     coets: new Array<Coet>(),
-    // coets: new Map<string, Coet>(),
     propulsorArray: new Array<number>()
   },
   getters: {
@@ -74,27 +71,6 @@ export default new Vuex.Store({
       context.commit("setNewProp", propulsor);
     }
   },
-  // getters: {
-  //   getCoets(state) {
-  //     return state.coets;
-  //   }
-  // },
-  // mutations: {
-  //   setCoet(state, coet: Coet): void {
-  //     state.coets.set(coet._codi, coet);
-  //   },
-  //   setCoets(state, coet: Coet): void {
-  //     state.coets.set(coet._codi, coet);
-  //   }
-  // },
-  // actions: {
-  //   addCoet(context, coet: Coet) {
-  //     context.commit("setCoet", coet);
-  //   },
-  //   putCohets(context, coets: Map<string, Coet>) {
-  //     context.commit("setCoets", coets);
-  //   }
-  // },
   modules: {
   }
 })
