@@ -28,4 +28,5 @@ export default class PropulsorComponent extends Vue {
       let newId = id-1;
       this.$store.state.coet._propulsors[newId].setPropulsorPower(this.powerProp);
   }
+}
 </script>

@@ -48,7 +48,10 @@
             <!-- Formulario per crear coet -->
             <form>
               <div class="form-group">
+                <div class="d-flex justify-content-center">
                 <label for="codiCoet">Codi del coet</label>
+                <small class="form-text text-muted pl-2"> (8 digits)</small>
+                </div>
                 <input
                   type="text"
                   class="form-control"
