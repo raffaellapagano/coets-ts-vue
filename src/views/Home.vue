@@ -3,11 +3,11 @@
 
     <button
       type="button"
-      class="btn btn-lg btn-primary m-2 animate__animated animate__flip"
+      class="btn btn-lg btn-primary m-5 animate__animated animate__flip"
       data-toggle="modal"
       data-target="#exampleModal"
     >
-      Fabrica de coets
+      Pulsa para Fabricar els coets
     </button>
 
     <div v-if="coetsHome.length != 0" id="listCoet" class="row d-flex align-content-center justify-content-center">
@@ -16,8 +16,8 @@
       </div>
     </div>
     <div class="d-flex justify-content-end">
-      <img src="./../assets/images/astronauta.png" alt="" class="mr-2 animate__animated animate__bounceInLeft ">
-      <button class="btn btn-primary mr-3" @click="carregarCursa">Cursa</button>
+      <img src="./../assets/images/astronauta.png" alt="" class="mr-2 animate__animated animate__bounceInLeft">
+      <button class="btn btn-primary mr-3 animate__animated animate__tada" @click="carregarCursa">Cursa</button>
     </div>
 
     <!-- ***************************************Modal********************************* -->
@@ -295,4 +295,9 @@ export default class Home extends Vue {
 </script>
 
 <style>
+.home{
+  height: 100vh;
+  background-image: url("./../assets/images/fabrica-de-coets.jpg");
+  background-position: center;
+}
 </style>

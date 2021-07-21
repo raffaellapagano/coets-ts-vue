@@ -1,29 +1,41 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
 
-    <div class="d-flex flex-column align-items-start">
+    <div class="d-flex flex-column align-items-start pt-3">
       <div class="d-flex align-items-center text-white" v-for="coet in coets" :key="coet.id">
-        <transition name="carreraok" :duration="10000">
-          <!-- <p class="card text-dark ">{{ coet._codi }}</p> -->
-          <img v-if="show" id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
-        </transition>
-        <!-- <div v-if="coet._curpower < 9" class="carrera">
+
+        <div v-if="coet._curpower < 9">
+          <p class="card bg-dark text-success border border-success mt-4">{{ coet._codi }}</p>
+          <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
+        </div>        
+        <div v-else-if="coet._curpower < 19" class="carrera">
           <p class="card text-dark ">{{ coet._codi }}</p>
           <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
         </div>
         <div v-else-if="coet._curpower < 19" class="carrera20">
           <p class="card text-dark">{{ coet._codi }}</p>
           <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
-        </div> -->
+        </div>
+        <div v-else-if="coet._curpower < 29" class="carrera10">
+          <p class="card text-dark">{{ coet._codi }}</p>
+          <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
+        </div>
+        <div v-else-if="coet._curpower <39" class="animate__animated animate__bounceInRight">
+          <p class="card text-dark">{{ coet._codi }}</p>
+          <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
+        </div>
+        <div v-else-if="coet._curpower >38" class="animate__animated animate__zoomInRight">
+          <p class="card text-dark">{{ coet._codi }}</p>
+          <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
+        </div>
       </div>
     </div>
 
-    <div id="control" class="bg-white p-2 w-100">
+    <div id="control" class="card bg-dark p-2 justify-content-center border border-success">
       <form class="form-inline">
         <div class="form-group">
-          <label for="codi" class="font-weight-bold mr-2">Coet</label>
-          <select name="codi" id="codi" class="form-control mr-3">
+          <label for="codi" class="font-weight-bold mr-2 text-success">Coet</label>
+          <select name="codi" id="codi" class="form-control mr-3 bg-dark text-success border border-success">
             <option
               v-for="coet in coets"
               :value="coet._codi"
@@ -32,41 +44,22 @@
             >
           </select>
         </div>
-        <!-- <button
-          id="btAccelerar"
+        <button
+          id="btIniciar"
           type="button"
-          class="btn btn-primary btn-sm ml-1 mr-1"
-          @click="accelerar"
+          class="btn btn-success ml-1 mr-1 text-dark"
+          @click="accelerarCoet()"
         >
           Accelerar
         </button>
         <button
-          id="btFrenar"
-          type="button"
-          class="btn btn-primary btn-sm ml-1 mr-1"
-          @click="frenar"
-        >
-          Frenar
-        </button> -->
-        <button
           id="btIniciar"
           type="button"
-          class="btn btn-primary btn-sm ml-1 mr-1"
-          @click="iniciCursa()"
+          class="btn btn-success ml-1 mr-1 text-dark"
+          @click="frenarCoet()"
         >
-          Iniciar
+          Frenar
         </button>
-        <!-- <button
-          id="btAturar"
-          type="button"
-          class="btn btn-danger btn-sm ml-1 mr-2"
-          @click="aturarCursa"
-        >
-          Aturar
-        </button>
-        <button id="btTornar" type="button" class="btn btn-danger btn-sm" @click="tornar">
-          Tornar
-        </button> -->
       </form>
     </div>
 
@@ -114,12 +107,24 @@ export default class Home extends Vue {
     return coets;
   }
 
-  iniciCursa(){
+  accelerarCoet(){
     let codi: HTMLInputElement = (document.getElementById("codi"));
     this.show = true;
     for (let i = 0; i < this.coets.length; i++) {
       if (codi.value === this.coets[i]._codi) {
         this.coets[i].accelerar();
+        console.log(this.coets[i]._curpower)
+      }
+      
+    }
+  }
+
+  frenarCoet(){
+    let codi: HTMLInputElement = (document.getElementById("codi"));
+    this.show = true;
+    for (let i = 0; i < this.coets.length; i++) {
+      if (codi.value === this.coets[i]._codi) {
+        this.coets[i].frenar();
         console.log(this.coets[i]._curpower)
       }
       
@@ -137,6 +142,12 @@ export default class Home extends Vue {
 
 #imgCursa{
  width: 100px;
+}
+
+#control{
+    position: fixed;
+    left: 5px;
+    bottom: 5px;
 }
 
 .carreraok-enter-active {
@@ -161,6 +172,19 @@ export default class Home extends Vue {
 }
 
 @keyframes carrera20 {
+  from{
+        transform: translateX(0px);
+    }
+    to{
+        transform: translateX(calc(100vw - 10vmin));
+    }
+}
+
+.carrera10{
+  animation: carrera10 10s linear 0s;
+}
+
+@keyframes carrera10 {
   from{
         transform: translateX(0px);
     }
