@@ -12,19 +12,19 @@
           <p class="card text-dark ">{{ coet._codi }}</p>
           <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
         </div>
-        <div v-else-if="coet._curpower < 19" class="carrera20">
+        <div v-else-if="coet._curpower < 29" class="carrera20">
           <p class="card text-dark">{{ coet._codi }}</p>
           <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
         </div>
-        <div v-else-if="coet._curpower < 29" class="carrera10">
+        <div v-else-if="coet._curpower < 39" class="carrera10">
           <p class="card text-dark">{{ coet._codi }}</p>
           <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
         </div>
-        <div v-else-if="coet._curpower <39" class="animate__animated animate__bounceInRight">
+        <div v-else-if="coet._curpower <49" class="animate__animated animate__bounceInRight">
           <p class="card text-dark">{{ coet._codi }}</p>
           <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
         </div>
-        <div v-else-if="coet._curpower >38" class="animate__animated animate__zoomInRight">
+        <div v-else-if="coet._curpower >48" class="animate__animated animate__zoomInRight">
           <p class="card text-dark">{{ coet._codi }}</p>
           <img id="imgCursa" :src="coet.getImage(imgArray[coet._img-1])" alt="">
         </div>
